@@ -1,9 +1,13 @@
 {
-  "name": "cork-plugin-content-markdown",
+  "name": "cork-content-markdown",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "discount": "~0.2.3",
+    "glob": "~3.1.10"
+  }
 }
