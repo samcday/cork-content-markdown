@@ -1,13 +1,24 @@
+fs = require "fs"
+path = require "path"
 glob = require "glob"
 discount = require "discount"
 
+regex = 
+	markdownFile: /(.*)\.md$/
+
 class AnnexHandler
-	constructor: (@cork, @config) ->
+	constructor: (@annex) ->
 	init: (files, cb) ->
 		@files = files
 		cb()
-	listPages: (cb) ->
+	processFile: (file, cb) ->
+		self = @
+		if matches = regex.markdownFile.exec file
+			outName = "#{matches[1]}.html"
+			fs.readFile (path.join @annex.root, file), "utf8", (err, contents) ->
+				self.annex.writeFile outName, (discount.parse contents), cb
+			return
+		cb()
 
-
-module.exports = (cork, annexRoot) ->
-	return (new AnnexHandler cork, annexRoot)
+module.exports = (annex) ->
+	return (new AnnexHandler annex)
