@@ -7,7 +7,6 @@
   },
   "license": "BSD",
   "dependencies": {
-    "discount": "~0.2.3",
-    "glob": "~3.1.10"
+    "discount": "~0.2.3"
   }
 }
