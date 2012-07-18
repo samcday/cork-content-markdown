@@ -15,7 +15,11 @@ class AnnexHandler
 		if matches = regex.markdownFile.exec file
 			outName = "#{matches[1]}.html"
 			fs.readFile (path.join @annex.root, file), "utf8", (err, contents) ->
-				self.annex.writeFile outName, (discount.parse contents), cb
+				generated = discount.parse contents
+				if layout = self.annex.config.layout
+					self.annex.writeContent outName, { layout: layout }, generated, cb
+				else
+					self.annex.writeFile outName, generated, cb
 			return
 		cb()
 
